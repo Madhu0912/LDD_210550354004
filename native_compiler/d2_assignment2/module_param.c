@@ -12,6 +12,7 @@ static int param_init(void)
 {
 	printk(KERN_ALERT"Hello world.\n");
 	printk(KERN_ALERT"charvar is %s\n",charvar);
+
 	printk(KERN_ALERT"intvar is %d\n",intvar);
 	return 0;
 }
