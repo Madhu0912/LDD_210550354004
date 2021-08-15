@@ -1,3 +1,4 @@
+/*Write a character driver with open and close functionality. Test the driver by writing an application that opens and closes the device driver. When open or closed, the open and close calls in the driver should be executed*/
 #include<linux/init.h>
 #include<linux/module.h>
 #include<linux/kdev_t.h>
