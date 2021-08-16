@@ -18,7 +18,7 @@ int main()
 	}
 	printf("operations to perform\n");
 	printf("enter (+) operator to addtion\n");
-	printf("enter (-) operator to subtractionwq\n");
+	printf("enter (-) operator to subtraction\n");
 	printf("enter (*) operator to multiplication\n");
 	printf("enter (/) operator to division\n");
 	printf("enter 0 to exit while loop\n");
