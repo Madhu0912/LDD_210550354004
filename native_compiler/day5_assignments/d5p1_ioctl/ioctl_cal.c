@@ -12,18 +12,22 @@
 #define NAME chardevice
 int a=0,b=0,value=0;
 int oper=0;
+int NAME_open(struct inode *inode,struct file *filp);
 long NAME_ioctl(struct file *filp,unsigned int cmd,unsigned long arg);
+int NAME_release(struct inode *inode,struct file *filp);
 //file operations
 struct file_operations fops = 
 {
 	.owner = THIS_MODULE,
+	.open = NAME_open,
 	.unlocked_ioctl=NAME_ioctl,
+	.release = NAME_release,
 };
 dev_t mydev;
 //structure for char driver
 struct cdev *my_cdev;
 //module init function
-static int __init chardevice_init(void)
+static int __init ioctl_init(void)
 {
 	int result;
 	int MAJOR,MINOR;
@@ -50,12 +54,18 @@ static int __init chardevice_init(void)
 
 }
 //module exit function
-static void __exit chardevice_exit(void)
+static void __exit ioctl_exit(void)
 {
 	unregister_chrdev_region(mydev,1);
 	cdev_del(my_cdev);
 	printk("Bye");
 	return;
+}
+//open system call 
+int NAME_open(struct inode *ionde,struct file *filp)
+{
+	printk("open system call\n");
+	return 0;
 }
 //ioctl function
 long NAME_ioctl(struct file *filp,unsigned int cmd,unsigned long arg)
@@ -98,8 +108,14 @@ long NAME_ioctl(struct file *filp,unsigned int cmd,unsigned long arg)
 	}
 	return 0;
 }
-module_init(chardevice_init);
-module_exit(chardevice_exit);
+//close system call
+int NAME_release(struct inode *inode,struct file *filp)
+{
+	printk("close and bye\n");
+	return 0;
+}
+module_init(ioctl_init);
+module_exit(ioctl_exit);
 
 MODULE_LICENSE("GPL");
 MODULE_AUTHOR("MADHU");
